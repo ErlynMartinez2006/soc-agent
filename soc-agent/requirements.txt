@@ -1,3 +1,6 @@
-# El agente usa solo la biblioteca estándar de Python (>= 3.9).
-# Solo para ejecutar las pruebas con pytest (opcional; también funcionan con unittest):
+# El agente (soc_agent/) usa solo la biblioteca estándar de Python (>= 3.9).
+# Interfaz gráfica:
+streamlit>=1.30
+pandas
+# Pruebas (opcional; también funcionan con unittest):
 pytest>=7.0

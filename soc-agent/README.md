@@ -8,15 +8,28 @@ maximizando `U(s,a) = w_e·P + w_b·B − w_r·R − w_c·C`.
 
 ```bash
 python main.py                  # 9 escenarios + simulación de 1000 alertas + KPIs (guarda en resultados/)
-python -m pytest -q             # 16 pruebas (o: python -m unittest discover tests)
+python -m pytest -q             # 17 pruebas (o: python -m unittest discover tests)
 python docs/generar_tablas.py   # regenera las tablas del informe a partir del código
 cd docs && xelatex informe.tex && xelatex informe.tex   # compila el informe (TikZ)
 ```
+
+## Interfaz gráfica (Streamlit)
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py        # se abre en http://localhost:8501
+```
+
+Pestañas: **Probar una alerta** (controles manuales, decisión y utilidad de cada acción, sensor corrupto),
+**Escenarios del informe** (los 9 casos), **Simulación y KPIs** (1000 alertas, comparación con líneas base y
+sensibilidad a `w_r`) y **Memoria por IP** (la sospecha sube con alertas repetidas). Los pesos de la utilidad
+se cambian en la barra lateral.
 
 ## Estructura
 
 | Ruta | Contenido |
 |---|---|
+| `app.py` | Interfaz gráfica en Streamlit |
 | `soc_agent/modelos.py` | `Percepcion` (sensores, con validación) y `EstadoProyectado` |
 | `soc_agent/base.py` | `AgenteBasadoEnUtilidad`: ciclo percepción → estado → utilidad → argmax → actuador |
 | `soc_agent/config.py` | Pesos, catálogo de acciones y coeficientes del estimador de amenaza |
