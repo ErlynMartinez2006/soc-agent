@@ -1,0 +1,13 @@
+\begin{tabular}{lcl}
+\toprule
+Término & Coeficiente & Variable normalizada \\
+\midrule
+Sesgo $\beta_0$ & $-$3,0 & --- \\
+Reputación de la IP & 2,5 & $r\in[0,1]$ \\
+Severidad del SIEM & 2,0 & $s=\text{severidad}/10$ \\
+Tráfico anómalo & 1,5 & $\tau\in[0,1]$ \\
+Intentos fallidos & 2,0 & $\min(n,20)/20$ \\
+Recurrencia (estado interno) & 1,5 & $\min(k,5)/5$ \\
+Bono por tipo: malware / exfiltración & 1,5 & $b_{\text{tipo}}$ \\
+\bottomrule
+\end{tabular}

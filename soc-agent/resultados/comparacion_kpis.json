@@ -1,0 +1,32 @@
+{
+  "Agente (utilidad)": {
+    "eventos": 1000,
+    "amenazas_reales": 133,
+    "mttc_min": 1.23,
+    "tasa_bloqueo_efectivo": 0.9474,
+    "amenazas_no_contenidas": 7,
+    "interrupciones_servicios_criticos": 1,
+    "falsos_positivos_afectados": 49,
+    "tasa_escalamiento": 0.17
+  },
+  "Reglas if-else": {
+    "eventos": 1000,
+    "amenazas_reales": 133,
+    "mttc_min": 1.0,
+    "tasa_bloqueo_efectivo": 0.5113,
+    "amenazas_no_contenidas": 65,
+    "interrupciones_servicios_criticos": 0,
+    "falsos_positivos_afectados": 15,
+    "tasa_escalamiento": 0.0
+  },
+  "Siempre escalar": {
+    "eventos": 1000,
+    "amenazas_reales": 133,
+    "mttc_min": 30.0,
+    "tasa_bloqueo_efectivo": 0.8947,
+    "amenazas_no_contenidas": 14,
+    "interrupciones_servicios_criticos": 0,
+    "falsos_positivos_afectados": 0,
+    "tasa_escalamiento": 1.0
+  }
+}

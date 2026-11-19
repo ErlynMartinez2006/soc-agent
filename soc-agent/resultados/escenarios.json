@@ -1,0 +1,143 @@
+[
+  {
+    "evento": "EVT-01",
+    "categoria": "Rutinario",
+    "descripcion": "Escaneo de puertos de baja severidad desde IP con buena reputación",
+    "p_amenaza": 0.1359,
+    "esperada": "IGNORAR",
+    "obtenida": "IGNORAR",
+    "utilidad": 120.11,
+    "utilidades": {
+      "IGNORAR": 120.11,
+      "ESCALAR_ANALISTA": 85.49,
+      "BLOQUEAR_IP": 38.0,
+      "AISLAR_HOST": -51.69
+    },
+    "ok": true
+  },
+  {
+    "evento": "EVT-02",
+    "categoria": "Rutinario",
+    "descripcion": "Un único fallo de login en estación, origen interno",
+    "p_amenaza": 0.0911,
+    "esperada": "IGNORAR",
+    "obtenida": "IGNORAR",
+    "utilidad": 133.6,
+    "utilidades": {
+      "IGNORAR": 133.6,
+      "ESCALAR_ANALISTA": 91.53,
+      "REVOCAR_CREDENCIALES": 16.04,
+      "AISLAR_HOST": -42.54
+    },
+    "ok": true
+  },
+  {
+    "evento": "EVT-03",
+    "categoria": "Ambiguo",
+    "descripcion": "Usuario legítimo (posible olvido de clave): 10 fallos, IP de reputación baja",
+    "p_amenaza": 0.4134,
+    "esperada": "ESCALAR_ANALISTA",
+    "obtenida": "ESCALAR_ANALISTA",
+    "utilidad": 47.87,
+    "utilidades": {
+      "IGNORAR": 25.99,
+      "ESCALAR_ANALISTA": 47.87,
+      "REVOCAR_CREDENCIALES": 21.4,
+      "AISLAR_HOST": 3.6
+    },
+    "ok": true
+  },
+  {
+    "evento": "EVT-04",
+    "categoria": "Ambiguo",
+    "descripcion": "Inicio de sesión anómalo en servidor crítico, origen interno, evidencia mixta",
+    "p_amenaza": 0.5744,
+    "esperada": "ESCALAR_ANALISTA",
+    "obtenida": "ESCALAR_ANALISTA",
+    "utilidad": 11.34,
+    "utilidades": {
+      "IGNORAR": -45.31,
+      "ESCALAR_ANALISTA": 11.34,
+      "REVOCAR_CREDENCIALES": -17.13,
+      "AISLAR_HOST": -76.05
+    },
+    "ok": true
+  },
+  {
+    "evento": "EVT-05",
+    "categoria": "Ambiguo",
+    "descripcion": "Posible exfiltración desde servidor crítico hacia IP externa (contención de menor impacto)",
+    "p_amenaza": 0.7858,
+    "esperada": "BLOQUEAR_IP",
+    "obtenida": "BLOQUEAR_IP",
+    "utilidad": 56.59,
+    "utilidades": {
+      "IGNORAR": -117.18,
+      "ESCALAR_ANALISTA": -14.66,
+      "BLOQUEAR_IP": 56.59,
+      "REVOCAR_CREDENCIALES": 9.38,
+      "AISLAR_HOST": 21.02
+    },
+    "ok": true
+  },
+  {
+    "evento": "EVT-06",
+    "categoria": "Crítico",
+    "descripcion": "Malware confirmado en servidor crítico, IP maliciosa conocida",
+    "p_amenaza": 0.9792,
+    "esperada": "AISLAR_HOST",
+    "obtenida": "AISLAR_HOST",
+    "utilidad": 100.77,
+    "utilidades": {
+      "IGNORAR": -320.0,
+      "ESCALAR_ANALISTA": -113.83,
+      "BLOQUEAR_IP": 43.93,
+      "AISLAR_HOST": 100.77
+    },
+    "ok": true
+  },
+  {
+    "evento": "EVT-07",
+    "categoria": "Crítico",
+    "descripcion": "Fuerza bruta masiva desde IP maliciosa contra una estación",
+    "p_amenaza": 0.934,
+    "esperada": "AISLAR_HOST",
+    "obtenida": "AISLAR_HOST",
+    "utilidad": 103.76,
+    "utilidades": {
+      "IGNORAR": -204.92,
+      "ESCALAR_ANALISTA": -52.57,
+      "BLOQUEAR_IP": 63.91,
+      "REVOCAR_CREDENCIALES": 21.88,
+      "AISLAR_HOST": 103.76
+    },
+    "ok": true
+  },
+  {
+    "evento": "EVT-08",
+    "categoria": "Extremo",
+    "descripcion": "Sensor corrupto: severidad fuera de rango (fail-safe)",
+    "p_amenaza": null,
+    "esperada": "ESCALAR_ANALISTA",
+    "obtenida": "ESCALAR_ANALISTA",
+    "utilidad": null,
+    "utilidades": {},
+    "ok": true
+  },
+  {
+    "evento": "EVT-09",
+    "categoria": "Extremo",
+    "descripcion": "Todos los indicadores al máximo en servidor crítico",
+    "p_amenaza": 0.9985,
+    "esperada": "AISLAR_HOST",
+    "obtenida": "AISLAR_HOST",
+    "utilidad": 108.13,
+    "utilidades": {
+      "IGNORAR": -349.25,
+      "ESCALAR_ANALISTA": -128.68,
+      "BLOQUEAR_IP": 40.75,
+      "AISLAR_HOST": 108.13
+    },
+    "ok": true
+  }
+]

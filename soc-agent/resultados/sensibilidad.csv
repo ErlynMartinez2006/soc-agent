@@ -1,0 +1,7 @@
+w_riesgo,eventos,amenazas_reales,mttc_min,tasa_bloqueo_efectivo,amenazas_no_contenidas,interrupciones_servicios_criticos,falsos_positivos_afectados,tasa_escalamiento
+50,1000,133,1.23,0.9624,5,1,59,0.043
+100,1000,133,1.23,0.9549,6,1,54,0.068
+200,1000,133,1.23,0.9474,7,1,49,0.103
+400,1000,133,1.23,0.9474,7,1,49,0.17
+800,1000,133,1.23,0.9398,8,1,51,0.27
+1600,1000,133,1.23,0.9398,8,1,59,0.338

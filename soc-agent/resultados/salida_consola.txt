@@ -1,0 +1,82 @@
+========================================================================
+PARTE 1: CASOS DE PRUEBA (rutinarios, ambiguos, críticos y extremos)
+========================================================================
+
+[AgenteSOC-v1] Evento EVT-01
+  U(s) por acción: {'IGNORAR': 120.11, 'ESCALAR_ANALISTA': 85.49, 'BLOQUEAR_IP': 38.0, 'AISLAR_HOST': -51.69}
+  Decisión óptima: 'IGNORAR' (U = 120.11)
+  [Rutinario] Escaneo de puertos de baja severidad desde IP con buena reputación
+  Esperada: IGNORAR | Obtenida: IGNORAR -> OK
+
+[AgenteSOC-v1] Evento EVT-02
+  U(s) por acción: {'IGNORAR': 133.6, 'ESCALAR_ANALISTA': 91.53, 'REVOCAR_CREDENCIALES': 16.04, 'AISLAR_HOST': -42.54}
+  Decisión óptima: 'IGNORAR' (U = 133.6)
+  [Rutinario] Un único fallo de login en estación, origen interno
+  Esperada: IGNORAR | Obtenida: IGNORAR -> OK
+
+[AgenteSOC-v1] Evento EVT-03
+  U(s) por acción: {'IGNORAR': 25.99, 'ESCALAR_ANALISTA': 47.87, 'REVOCAR_CREDENCIALES': 21.4, 'AISLAR_HOST': 3.6}
+  Decisión óptima: 'ESCALAR_ANALISTA' (U = 47.87)
+  [Ambiguo] Usuario legítimo (posible olvido de clave): 10 fallos, IP de reputación baja
+  Esperada: ESCALAR_ANALISTA | Obtenida: ESCALAR_ANALISTA -> OK
+
+[AgenteSOC-v1] Evento EVT-04
+  U(s) por acción: {'IGNORAR': -45.31, 'ESCALAR_ANALISTA': 11.34, 'REVOCAR_CREDENCIALES': -17.13, 'AISLAR_HOST': -76.05}
+  Decisión óptima: 'ESCALAR_ANALISTA' (U = 11.34)
+  [Ambiguo] Inicio de sesión anómalo en servidor crítico, origen interno, evidencia mixta
+  Esperada: ESCALAR_ANALISTA | Obtenida: ESCALAR_ANALISTA -> OK
+
+[AgenteSOC-v1] Evento EVT-05
+  U(s) por acción: {'IGNORAR': -117.18, 'ESCALAR_ANALISTA': -14.66, 'BLOQUEAR_IP': 56.59, 'REVOCAR_CREDENCIALES': 9.38, 'AISLAR_HOST': 21.02}
+  Decisión óptima: 'BLOQUEAR_IP' (U = 56.59)
+  [Ambiguo] Posible exfiltración desde servidor crítico hacia IP externa (contención de menor impacto)
+  Esperada: BLOQUEAR_IP | Obtenida: BLOQUEAR_IP -> OK
+
+[AgenteSOC-v1] Evento EVT-06
+  U(s) por acción: {'IGNORAR': -320.0, 'ESCALAR_ANALISTA': -113.83, 'BLOQUEAR_IP': 43.93, 'AISLAR_HOST': 100.77}
+  Decisión óptima: 'AISLAR_HOST' (U = 100.77)
+  [Crítico] Malware confirmado en servidor crítico, IP maliciosa conocida
+  Esperada: AISLAR_HOST | Obtenida: AISLAR_HOST -> OK
+
+[AgenteSOC-v1] Evento EVT-07
+  U(s) por acción: {'IGNORAR': -204.92, 'ESCALAR_ANALISTA': -52.57, 'BLOQUEAR_IP': 63.91, 'REVOCAR_CREDENCIALES': 21.88, 'AISLAR_HOST': 103.76}
+  Decisión óptima: 'AISLAR_HOST' (U = 103.76)
+  [Crítico] Fuerza bruta masiva desde IP maliciosa contra una estación
+  Esperada: AISLAR_HOST | Obtenida: AISLAR_HOST -> OK
+  [Extremo] Sensor corrupto: severidad fuera de rango (fail-safe)
+  Esperada: ESCALAR_ANALISTA | Obtenida: ESCALAR_ANALISTA -> OK
+
+[AgenteSOC-v1] Evento EVT-09
+  U(s) por acción: {'IGNORAR': -349.25, 'ESCALAR_ANALISTA': -128.68, 'BLOQUEAR_IP': 40.75, 'AISLAR_HOST': 108.13}
+  Decisión óptima: 'AISLAR_HOST' (U = 108.13)
+  [Extremo] Todos los indicadores al máximo en servidor crítico
+  Esperada: AISLAR_HOST | Obtenida: AISLAR_HOST -> OK
+
+Bitácora de actuadores:
+  - SIN ACCION: EVT-01 (alerta descartada)
+  - SIN ACCION: EVT-02 (alerta descartada)
+  - TICKET: escalar EVT-03 (prioridad MEDIA)
+  - TICKET: escalar EVT-04 (prioridad ALTA)
+  - FIREWALL: bloquear 198.51.100.77
+  - EDR/NAC: aislar host SRV-DB-02
+  - EDR/NAC: aislar host WS-040
+  - TICKET: evento EVT-08 con datos inválidos (severidad_siem=15.0 fuera del rango [0.0, 10.0])
+  - EDR/NAC: aislar host SRV-AD-01
+
+========================================================================
+PARTE 2: SIMULACIÓN (1000 alertas sintéticas, semilla 42) Y KPIs
+========================================================================
+Política                      MTTC(min)   Bloqueo efectivo      No contenidas Interrup. críticas       FP afectados       Escalamiento
+Agente (utilidad)                  1.23             0.9474                  7                  1                 49               0.17
+Reglas if-else                      1.0             0.5113                 65                  0                 15                0.0
+Siempre escalar                    30.0             0.8947                 14                  0                  0                1.0
+
+Sensibilidad al peso de riesgo w_r:
+  w_r=   50: bloqueo=0.9624, FP afectados=59, escalamiento=0.043
+  w_r=  100: bloqueo=0.9549, FP afectados=54, escalamiento=0.068
+  w_r=  200: bloqueo=0.9474, FP afectados=49, escalamiento=0.103
+  w_r=  400: bloqueo=0.9474, FP afectados=49, escalamiento=0.17
+  w_r=  800: bloqueo=0.9398, FP afectados=51, escalamiento=0.27
+  w_r= 1600: bloqueo=0.9398, FP afectados=59, escalamiento=0.338
+
+Resultados guardados en /home/claude/soc-agent/resultados

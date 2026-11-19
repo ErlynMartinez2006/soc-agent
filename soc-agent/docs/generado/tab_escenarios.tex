@@ -1,0 +1,15 @@
+\begin{tabularx}{\textwidth}{llXcccc}
+\toprule
+ID & Categoría & Descripción & $p$ & Decisión del agente & $U^*$ & OK \\
+\midrule
+EVT-01 & Rutinario & Escaneo de puertos de baja severidad desde IP con buena reputación & 0,14 & \texttt{IGNORAR} & 120,11 & \checkmark \\
+EVT-02 & Rutinario & Un único fallo de login en estación, origen interno & 0,09 & \texttt{IGNORAR} & 133,60 & \checkmark \\
+EVT-03 & Ambiguo & Usuario legítimo (posible olvido de clave): 10 fallos, IP de reputación baja & 0,41 & \texttt{ESCALAR\_ANALISTA} & 47,87 & \checkmark \\
+EVT-04 & Ambiguo & Inicio de sesión anómalo en servidor crítico, origen interno, evidencia mixta & 0,57 & \texttt{ESCALAR\_ANALISTA} & 11,34 & \checkmark \\
+EVT-05 & Ambiguo & Posible exfiltración desde servidor crítico hacia IP externa (contención de menor impacto) & 0,79 & \texttt{BLOQUEAR\_IP} & 56,59 & \checkmark \\
+EVT-06 & Crítico & Malware confirmado en servidor crítico, IP maliciosa conocida & 0,98 & \texttt{AISLAR\_HOST} & 100,77 & \checkmark \\
+EVT-07 & Crítico & Fuerza bruta masiva desde IP maliciosa contra una estación & 0,93 & \texttt{AISLAR\_HOST} & 103,76 & \checkmark \\
+EVT-08 & Extremo & Sensor corrupto: severidad fuera de rango (fail-safe) & --- & \texttt{ESCALAR\_ANALISTA} & --- & \checkmark \\
+EVT-09 & Extremo & Todos los indicadores al máximo en servidor crítico & 1,00 & \texttt{AISLAR\_HOST} & 108,13 & \checkmark \\
+\bottomrule
+\end{tabularx}
